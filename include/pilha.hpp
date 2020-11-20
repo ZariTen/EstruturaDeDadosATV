@@ -39,11 +39,7 @@ struct pilha{
             Node* temp = topo->prev;
             delete topo;
             topo = temp;
-
         }
-
-
-
     }
     
     
