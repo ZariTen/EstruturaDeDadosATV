@@ -34,11 +34,13 @@ struct pilha{
     T top(){
         return topo->value;
     }
+    
     void pop(){
         if (topo != nullptr){
             Node* temp = topo->prev;
             delete topo;
             topo = temp;
+            --count;
         }
     }
     
