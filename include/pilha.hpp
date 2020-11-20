@@ -27,20 +27,27 @@ struct pilha{
         }else {
             topo = new Node();
             topo->value = value;
+            topo->prev = nullptr;
             ++count;
         }
     }
     
-    T top(){
+    T top(){ //TODO: lancar exceção caso não haja
         return topo->value;
     }
     
     void pop(){
         if (topo != nullptr){
-            Node* temp = topo->prev;
-            delete topo;
-            topo = temp;
-            --count;
+            if(topo->prev != nullptr){ 
+                Node* temp = topo->prev;
+                delete topo;
+                topo = temp;
+                --count;
+            }else{
+                delete topo;
+                topo = nullptr;
+                count = 0;
+            }
         }
     }
     
