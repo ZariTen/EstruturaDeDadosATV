@@ -6,7 +6,7 @@
 
 template<typename T>
 struct lista{
-    class Node{
+    struct Node{
         T value;
         Node* prev;
         Node* next;
@@ -57,9 +57,32 @@ struct lista{
         }
     }
 
-    void insertAtFront(T value);
-    void removeAtFront(T value);
-    void insertAtBack();
+    void insertAtFront(T value){
+        Node* other = new Node();
+        other->value = value;
+        other->prev = nullptr;
+        other->next = first;
+        first = other;
+        ++nodeCount;
+    }
+    void removeAtFront(){
+        if (first != nullptr){
+            if (first->next != nullptr){
+                Node* temp = first->next;
+                delete first;
+                first = temp;
+                --nodeCount;
+            }else{
+                delete first;
+                first = nullptr;
+                nodeCount = 0;
+            }
+        }
+    }
+    void insertAtBack(T value){
+
+
+    }
     void removeAtBack();
 
     void print(){
@@ -73,6 +96,25 @@ struct lista{
             std::cout << current->value << std::endl;
             current = current->next;
         } while (current != nullptr);
+    }
+
+    ~lista(){
+        if (size() == 0){
+            return;
+        }
+
+        Node* current = first;
+
+        while(current != nullptr){
+            Node* tmp = current->next;
+            delete current;
+            current = tmp;
+        }
+
+        nodeCount = 0;
+        first = nullptr;
+        last = nullptr;
+
     }
 };
 
