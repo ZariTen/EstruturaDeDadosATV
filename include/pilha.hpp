@@ -32,8 +32,12 @@ struct pilha{
         }
     }
     
-    T top(){ //TODO: lancar exceção caso não haja
-        return topo->value;
+    Node* top(){ //TODO: lancar exceção caso não haja
+        if (topo != nullptr){
+            return topo;
+        }else{
+            return nullptr;
+        }
     }
     
     void pop(){
