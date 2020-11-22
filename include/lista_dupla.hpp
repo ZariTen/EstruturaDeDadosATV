@@ -59,7 +59,7 @@ struct lista{
         Node* previousNode = nullptr;
         Node* currentNode = first;
 
-        while (currentPosition < position) {
+        while (currentPosition < position-1) {
             previousNode = currentNode;
             currentNode = currentNode->next;
 
