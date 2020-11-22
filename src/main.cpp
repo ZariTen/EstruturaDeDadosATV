@@ -2,17 +2,19 @@
 #include <pilha.hpp>
 #include <fila.hpp>
 #include <lista_dupla.hpp>
+#include <simulador.hpp>
 
 
 int main(int argc, char* argv[]){
-        lista<int> listaT;
-        listaT.insertAtFront(1);
-        listaT.insertAtFront(2);
-        listaT.removeAtFront();
-        listaT.removeAtFront();
-        listaT.removeAtFront();
+        simulador s;
+        fila<int> f;
+        pilha<int> p;
+        lista<int> l;
         
-
-        listaT.print();      
+        s.lerArquivo(argv[1]);
+        
+        
+        
+ 
         return 0;
 }

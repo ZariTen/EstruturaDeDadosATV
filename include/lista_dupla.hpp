@@ -20,7 +20,35 @@ struct lista{
     size_t size(){
         return nodeCount;
     }
-    void insertAt(T value, size_t position);
+
+    void insertAt(T value, size_t position){
+        if (position == size()+1){
+            insertAtBack(value);
+
+        } else if(position == 0){
+            insertAtFront(value);
+        } else if(position > 0 || position < size()+1){ //Verificar se position está dentro do tamanho
+            Node* tmpPrev = first;
+            Node* tmpNext = first->next;
+            size_t loopCount = 0;
+
+            while (loopCount != position-2){
+                tmpPrev = tmpNext;
+                tmpNext = tmpNext->next;
+                ++loopCount;
+            
+            }
+
+            Node* other = new Node();
+            other->value = value;
+            other->prev = tmpPrev;
+            other->next = tmpNext;
+
+            tmpPrev->next = other;
+            tmpNext->prev = other;
+            ++nodeCount;
+        }
+    }
 
     void removeAt(size_t position){
         if (position >= size()) {
@@ -62,15 +90,26 @@ struct lista{
         other->value = value;
         other->prev = nullptr;
         other->next = first;
+        if (first != nullptr){
+            first->prev = other;
+        }
+        if (nodeCount == 0){
+            last = other;
+        } else if (nodeCount == 1){
+            last->prev = other;
+        }
+            
         first = other;
         ++nodeCount;
     }
+
     void removeAtFront(){
         if (first != nullptr){
             if (first->next != nullptr){
                 Node* temp = first->next;
                 delete first;
                 first = temp;
+                first->prev = nullptr;
                 --nodeCount;
             }else{
                 delete first;
@@ -79,11 +118,37 @@ struct lista{
             }
         }
     }
+
     void insertAtBack(T value){
-
-
+        Node* other = new Node();
+        if (last == nullptr){
+            first = other;
+            last = other;
+        } else {
+            last->next = other;
+        }
+        other->value = value;
+        other->prev = last;
+        other->next = nullptr;
+        last = other;
+        ++nodeCount;
     }
-    void removeAtBack();
+
+    void removeAtBack(){
+        if (last != nullptr){
+            if (last->prev != nullptr){
+                Node* temp = last->prev;
+                delete last;
+                last = temp;
+                last->next = nullptr;
+                --nodeCount;
+            } else{
+                delete last;
+                last = nullptr;
+                nodeCount = 0;
+            }
+        }
+    }
 
     void print(){
         if (size() == 0) {
