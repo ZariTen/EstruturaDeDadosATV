@@ -1,6 +1,6 @@
 #ifndef PILHA_HPP
 #define PILHA_HPP
-
+#include <cstdio>
 template <typename T>
 struct pilha{
     struct Node{
@@ -8,7 +8,7 @@ struct pilha{
         Node* prev;
     };
 
-    size_t count;
+    size_t count = 0;
     Node* topo = nullptr;
     
     

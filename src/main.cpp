@@ -6,12 +6,19 @@
 
 
 int main(int argc, char* argv[]){
+        //argv[1] = localização
         simulador s;
         fila<int> f;
         pilha<int> p;
         lista<int> l;
         
-        s.lerArquivo(argv[1]);
+        if (argc < 1) {
+            std::cout << "Uso: <localização das instruções>" << std::endl;
+        }
+        
+        s.lerComando(argv[1],f,p,l);
+        
+        
         
         
         
